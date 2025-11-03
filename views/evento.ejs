@@ -63,18 +63,16 @@
   <!-- Intereses -->
   <div class="mb-3">
     <label class="form-label d-block">Intereses</label>
-    <% const opciones=['música', 'deporte' , 'tecnología' , 'arte' , 'otros' ]; %>
-    <% opciones.forEach(op => { %>
+    <% const opciones = ['Música', 'Deporte' , 'Tecnología' , 'Arte' , 'Otros' ]; %>
+    <% opciones.forEach(op => { const idPlano = op.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase(); %> 
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" name="intereses" value="<%= op || '' %>" id="<%= op %>" <%= intereses.includes(op) ? 'checked' : '' %>>
-        <label class="form-check-label" for="<%= op %>">
-          <%= op.charAt(0).toUpperCase() + op.slice(1) %>
-        </label>
+        <input class="form-check-input" type="checkbox" name="intereses" value="<%= op %>" id="<%= idPlano %>" <%= intereses.includes(op) ? 'checked' : '' %>>
+        <label class="form-check-label" for="<%= idPlano %>"><%= op %></label>
       </div>
     <% }) %>
   </div>
 
-  <!-- Botón -->
+  <!-- Submit -->
   <div class="text-center">
     <button type="submit" class="btn btn-danger px-4">Apúntate</button>
   </div>

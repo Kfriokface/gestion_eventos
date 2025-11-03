@@ -1,5 +1,5 @@
 const express = require("express");
-const engine = require("ejs-mate");
+const engine = require("ejs-mate"); // soporte para layouts, partials y reusabilidad de vistas
 const app = express();
 const path = require("path");
 const PORT = 3000;
@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // Middleware para parsear datos de formularios (POST)
 app.use(express.urlencoded({ extended: true }));
 
-// Control de timeout
+// Control de timeout (protege al servidor Express de peticiones que tardan demasiado)
 app.use((req, res, next) => {
   const ms = 10000; //10 seg en milisegundos
   const timer = setTimeout(() => {
@@ -109,13 +109,14 @@ app.post("/evento", (req, res) => {
     });
   }
 
+  // si no hay errores
   res.render("evento-ok", {
     title: "Registro completado",
     nombreEvento,
     fechaEvento: dayjs(fechaEvento).format("DD-MM-YYYY"),
     ciudadEvento,
     tipoEvento,
-    intereses
+    intereses,
   });
 });
 
