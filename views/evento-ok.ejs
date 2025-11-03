@@ -1,0 +1,28 @@
+<% layout('layouts/base') %>
+
+<h1 class="mb-4 fs-3 text-white">¡Te has registrado al evento correctamente!</h1>
+<div class="card card--ok mb-3 m-auto">
+  <div class="row g-0">
+    <div class="col-md-8">
+      <div class="card-body text-start">
+        <h5 class="card-title mb-3 text-danger">Estos son los datos que has enviado:</h5>
+        <p class="mb-1"><strong>Nombre del evento: </strong><%= nombreEvento %></p>
+        <p class="mb-1"><strong>Fecha del evento: </strong><%= fechaEvento %></p>
+        <p class="mb-1"><strong>Lugar del evento: </strong><%= ciudadEvento %></p>
+        <p class="mb-1"><strong>Tipo de evento: </strong><%= tipoEvento %></p>
+        <p class="mb-0"><strong>Te interesan estas cosas: </strong>
+        <% if (intereses && intereses.length > 0) { %>
+          <%= intereses.join(", ") %>
+        <% } else { %>
+          No seleccionaste ningún interés.
+        <% } %>
+        </p>
+      </div>
+    </div>
+    <div class="col-md-4 text-center bg-danger overflow-hidden">
+      <img src="yes.webp" alt="Yes" class="h-100">
+    </div>
+  </div>
+</div>
+
+<a href="/" class="btn btn-secondary mt-3">Inicio</a>
