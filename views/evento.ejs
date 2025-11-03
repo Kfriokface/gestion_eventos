@@ -1,0 +1,83 @@
+<% layout('layouts/base') %>
+
+<h1 class="mb-4 fs-3 text-start text-white">Rellena el siguiente formulario para apuntarte al evento</h1>
+
+<form action="/evento" method="POST" class="text-start text-bg-light p-4 mb-3 rounded-3">
+
+  <!-- Nombre del evento -->
+  <div class="mb-3">
+    <label for="nombreEvento" class="form-label">Nombre del evento</label>
+    <input type="text" id="nombreEvento" name="nombreEvento" placeholder="Introduce el nombre del evento" class="form-control <%= errores && errores.nombreEvento ? 'is-invalid border-danger shadow-outline' : '' %>" value="<%= nombreEvento || '' %>">
+    <% if (errores && errores.nombreEvento) { %>
+      <div class="invalid-feedback">
+        <%= errores.nombreEvento %>
+      </div>
+      <% } %>
+  </div>
+
+  <!-- Fecha del evento -->
+  <div class="mb-3">
+    <label for="fechaEvento" class="form-label">Fecha del evento</label>
+    <input type="date" class="form-control <%= errores && errores.fechaEvento ? 'is-invalid border-danger shadow-outline' : '' %>" id="fechaEvento" name="fechaEvento" value="<%= fechaEvento || '' %>">
+    <% if (errores && errores.fechaEvento) { %>
+      <div class="invalid-feedback">
+        <%= errores.fechaEvento %>
+      </div>
+      <% } %>
+  </div>
+
+  <!-- Ciudad -->
+  <div class="mb-3">
+    <label for="ciudadEvento" class="form-label">Ciudad</label>
+    <select class="form-select <%= errores && errores.ciudadEvento ? 'is-invalid border-danger shadow-outline' : '' %>" id="ciudadEvento" name="ciudadEvento">
+      <option value="">Selecciona una ciudad</option>
+      <option value="Madrid" <%= ciudadEvento === 'Madrid' ? 'selected' : '' %>>Madrid</option>
+      <option value="Barcelona" <%= ciudadEvento === 'Barcelona' ? 'selected' : '' %>>Barcelona</option>
+      <option value="Orense" <%= ciudadEvento === 'Orense' ? 'selected' : '' %>>Orense</option>
+    </select>
+    <% if (errores && errores.ciudadEvento) { %>
+      <div class="invalid-feedback">
+        <%= errores.ciudadEvento %>
+      </div>
+      <% } %>
+  </div>
+
+  <!-- Tipo de evento -->
+  <div class="mb-3">
+    <label class="form-label d-block">Tipo de evento</label>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="tipoEvento" id="presencial" value="presencial" <%= tipoEvento === 'presencial' ? 'checked' : '' %>>
+      <label class="form-check-label" for="presencial">Presencial</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="tipoEvento" id="online" value="online" <%= tipoEvento === 'online' ? 'checked' : '' %>>
+      <label class="form-check-label" for="online">Online</label>
+    </div>
+    <% if (errores && errores.tipoEvento) { %>
+      <div class="invalid-feedback d-block">
+        <%= errores.tipoEvento %>
+      </div>
+      <% } %>
+  </div>
+
+  <!-- Intereses -->
+  <div class="mb-3">
+    <label class="form-label d-block">Intereses</label>
+    <% const opciones=['música', 'deporte' , 'tecnología' , 'arte' , 'otros' ]; %>
+    <% opciones.forEach(op => { %>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name="intereses" value="<%= op || '' %>" id="<%= op %>" <%= intereses.includes(op) ? 'checked' : '' %>>
+        <label class="form-check-label" for="<%= op %>">
+          <%= op.charAt(0).toUpperCase() + op.slice(1) %>
+        </label>
+      </div>
+    <% }) %>
+  </div>
+
+  <!-- Botón -->
+  <div class="text-center">
+    <button type="submit" class="btn btn-danger px-4">Apúntate</button>
+  </div>
+</form>
+
+<a href="/" class="btn btn-secondary mt-3">Inicio</a>
